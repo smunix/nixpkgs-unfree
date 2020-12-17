@@ -11,7 +11,7 @@
         config.allowUnfree = true;
       };
       {
-        inherit (pkgs) citrix-workspace;
+        inherit (pkgs) citrix_workspace;
         inherit (pkgs) google-chrome;
         inherit (pkgs) google-chrome-dev;
         inherit (pkgs) google-chrome-beta;
