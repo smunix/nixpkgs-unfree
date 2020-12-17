@@ -11,7 +11,9 @@
         config.allowUnfree = true;
       };
       {
+        inherit (pkgs) google-chrome;
         inherit (pkgs) google-chrome-dev;
+        inherit (pkgs) google-chrome-beta;
         inherit (pkgs) spotify;
         inherit (pkgs) zoom-us;
       };
