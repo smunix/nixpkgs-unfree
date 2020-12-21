@@ -25,6 +25,7 @@
           inherit (pkgs) google-chrome-beta;
           inherit (pkgs) spotify;
           inherit (pkgs) zoom-us;
+          inherit (pkgs) xpdf;
           # inherit (pkgs) gitAndTools;
         };
         defaultPackage = packages.hello;
