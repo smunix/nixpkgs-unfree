@@ -9,7 +9,12 @@
       let
         pkgs = import nixpkgs {
             inherit system;
-            config.allowUnfree = true;
+            config = {
+              allowUnfree = true;
+              permittedInsecurePackages = [
+                "xpdf-4.02"
+              ];
+            };
           };
       in rec {
         packages = flake-utils.lib.flattenTree {
