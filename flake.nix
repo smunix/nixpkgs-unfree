@@ -46,10 +46,11 @@
                 inherit vscode;
                 inherit (vscode-extensions.alanz) vscode-hie-server;
                 inherit (vscode-extensions.haskell) haskell;
+                inherit (vscode-extensions.ms-vscode) cpptools;
               };
             };
           };
-          inherit gitAndTools;
+          # inherit gitAndTools;
         });
       }
     );
