@@ -17,20 +17,40 @@
             };
           };
       in rec {
-        packages = flake-utils.lib.flattenTree {
-          inherit (pkgs) hello;
-          inherit (pkgs) citrix_workspace;
-          inherit (pkgs) google-chrome;
-          inherit (pkgs) google-chrome-dev;
-          inherit (pkgs) google-chrome-beta;
-          inherit (pkgs) spotify;
-          inherit (pkgs) zoom-us;
-          inherit (pkgs) xpdf;
-          # inherit (pkgs) gitAndTools;
-        };
-        defaultPackage = packages.hello;
-        apps.hello = flake-utils.lib.mkApp { drv = packages.hello; };
-        defaultApp = apps.hello;
+        packages = flake-utils.lib.flattenTree ( with pkgs; recurseIntoAttrs {
+          web = recurseIntoAttrs {
+            chrome = recurseIntoAttrs {
+              stable = google-chrome;
+              beta = google-chrome-beta;
+              unstable = google-chrome-dev;
+            };
+          };
+          music = recurseIntoAttrs {
+            inherit
+              spotify
+            ;
+          };
+          talk = recurseIntoAttrs {
+            inherit
+              zoom-us
+            ;
+          };
+          remote = recurseIntoAttrs {
+            inherit
+              citrix_workspace
+            ;
+          };
+          dev = recurseIntoAttrs {
+            ide = recurseIntoAttrs {
+              code = recurseIntoAttrs {
+                inherit vscode;
+                inherit (vscode-extensions.alanz) vscode-hie-server;
+                inherit (vscode-extensions.haskell) haskell;
+              };
+            };
+          };
+          inherit gitAndTools;
+        });
       }
     );
 }
