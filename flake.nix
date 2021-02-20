@@ -30,6 +30,11 @@
               spotify
             ;
           };
+          office = recurseIntoAttrs {
+            inherit
+              wpsoffice
+            ;
+          };
           talk = recurseIntoAttrs {
             inherit
               zoom-us
