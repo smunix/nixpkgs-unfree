@@ -37,6 +37,7 @@
           };
           talk = recurseIntoAttrs {
             inherit
+              discord 
               zoom-us
             ;
           };
