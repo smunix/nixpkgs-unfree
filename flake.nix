@@ -3,8 +3,9 @@
 
   inputs.nixpkgs.url = "github:NixOs/nixpkgs/master";
   inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs.emacs.url = "github:nix-community/emacs-overlay?ref=master";
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, emacs }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
@@ -13,6 +14,7 @@
             allowUnfree = true;
             permittedInsecurePackages = [ "xpdf-4.02" ];
           };
+	  overlays = [ emacs.overlay ];
         };
       in rec {
         packages = flake-utils.lib.flattenTree (with pkgs;
@@ -25,7 +27,7 @@
               };
             };
             music = recurseIntoAttrs { inherit spotify; };
-            office = recurseIntoAttrs { inherit wpsoffice; };
+            office = recurseIntoAttrs { inherit wpsoffice emacsGcc emacsGit; };
             talk = recurseIntoAttrs { inherit discord zoom-us; };
             remote = recurseIntoAttrs { inherit citrix_workspace; };
             dev = recurseIntoAttrs {
